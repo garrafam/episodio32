@@ -1,0 +1,113 @@
+[
+	{
+		"title": "producto1",
+		"description": "prod1",
+		"price": 450,
+		"thumbnail": "sinruta",
+		"code": "a20//",
+		"stock": 25,
+		"id": 4
+	},
+	{
+		"title": "actualizacion12",
+		"description": "act",
+		"price": 123,
+		"thumbnail": "",
+		"code": "",
+		"stock": 50,
+		"id": 5
+	},
+	{
+		"title": "producto1",
+		"description": "prod1",
+		"price": 450,
+		"thumbnail": "sinruta",
+		"code": "a25",
+		"stock": 25,
+		"id": 6
+	},
+	{
+		"title": "producto1",
+		"description": "prod1",
+		"price": 450,
+		"thumbnail": "sinruta",
+		"code": "az15",
+		"stock": 25,
+		"id": 7
+	},
+	{
+		"title": "Manzana",
+		"description": "prod1",
+		"price": 450,
+		"thumbnail": "sinruta",
+		"code": "az15m",
+		"stock": 25,
+		"id": 8
+	},
+	{
+		"title": "peras",
+		"description": "prod1",
+		"price": 730,
+		"thumbnail": "sinruta",
+		"code": "per72",
+		"stock": 12,
+		"id": 10
+	},
+	{
+		"title": "tomates",
+		"description": "prod1",
+		"price": 124,
+		"thumbnail": "sinruta",
+		"code": "tom72",
+		"stock": 12,
+		"id": 11
+	},
+	{
+		"title": "morron",
+		"description": "prod1",
+		"price": 339,
+		"thumbnail": "sinruta",
+		"code": "mor24",
+		"stock": 12,
+		"id": 12
+	},
+	{
+		"title": "Zapallo",
+		"description": "prod1",
+		"price": 339,
+		"thumbnail": "sinruta",
+		"code": "zap02",
+		"stock": 12,
+		"id": 13
+	},
+	{
+		"title": "cebolla",
+		"description": "moradas",
+		"price": "400",
+		"thumbnail": "sinruta",
+		"code": "ceb31095",
+		"stock": 90,
+		"id": 16
+	},
+	{
+		"title": "cebolla",
+		"description": "moradas",
+		"price": "400",
+		"thumbnail": "sinruta",
+		"code": "ceb31096",
+		"stock": 9,
+		"id": 17
+	},
+	{
+		"title": "Superman",
+		"description": "juguete",
+		"price": "1200",
+		"thumbnail": "",
+		"code": "130",
+		"stock": "20",
+		"id": 18
+	},
+	{
+		"id": 19
+	}
+]
