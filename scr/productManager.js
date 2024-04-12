@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-const path='./Product.json'
+//const path='./Product.json'
 
 export default class ProductManager{
     constructor(path){
@@ -70,9 +70,9 @@ export default class ProductManager{
         }
     }
     
-    getProductById= async(pid)=>{
+    getProductById= async(pid)=>{        
         const productsBd= await this.readFile()        
-        const product=productsBd.find(prod=>prod.id===parseInt(pid))        
+        const product=productsBd.find(prod=>prod.id===parseInt(pid))           
         if(!product)return 'no está el producto solicitado'
         return (product)
 
