@@ -1,11 +1,25 @@
 [
 	{
 		"id": 1,
-		"productos": []
+		"productos": [
+			{
+				"id": 12,
+				"cantidad": 3
+			}
+		]
 	},
 	{
 		"id": 2,
-		"productos": []
+		"productos": [
+			{
+				"id": 11,
+				"cantidad": 1
+			},
+			{
+				"id": 12,
+				"cantidad": 2
+			}
+		]
 	},
 	{
 		"id": 3,
@@ -18,9 +32,5 @@
 	{
 		"id": 5,
 		"productos": []
-	},
-	{
-		"id": 12,
-		"cantidad": 1
 	}
 ]

@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import ProductManager from '../scr/productManager.js'
 const router=Router()
-const {getProduct, getProductById,addProduct,updateProduct,deleteProduct}=new ProductManager()
-const path='./Product.json'
+//const {getProduct, getProductById,addProduct,updateProduct,deleteProduct}=new ProductManager()
+const path='../Product.json'
 const products= new ProductManager(path);
 
 router.get('/', async(req,res)=>{
