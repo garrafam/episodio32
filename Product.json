@@ -108,6 +108,13 @@
 		"id": 18
 	},
 	{
+		"title": "cebolla1",
+		"description": "prod1",
+		"price": 439,
+		"thumbnail": "sinruta",
+		"status": true,
+		"code": "ceb343",
+		"stock": 19,
 		"id": 19
 	}
 ]

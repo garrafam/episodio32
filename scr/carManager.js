@@ -1,7 +1,7 @@
 import fs from 'fs';
 import ProductManager from './productManager.js';
-const path='../Product.json'
-const carFile = '../Carrito.json';
+const path='./Product.json'
+const carFile = './Carrito.json';
 const produc=new ProductManager(path)
 export default class CarManager {
     constructor() {

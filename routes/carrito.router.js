@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import CarManager from '../scr/carManager.js';
+import CarManager from '../scr/CarManager.js ';
 const router=Router()
 //const {crearCarrito,addProductocar}=new CarManager()
-const carFile='../Carrito.json'
+const carFile='./Carrito.json'
 const products= new CarManager(carFile);
 
 router.post('/', (req,res) =>{     

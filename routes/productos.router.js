@@ -2,7 +2,7 @@ import { Router } from 'express'
 import ProductManager from '../scr/productManager.js'
 const router=Router()
 //const {getProduct, getProductById,addProduct,updateProduct,deleteProduct}=new ProductManager()
-const path='../Product.json'
+const path='./Product.json'
 const products= new ProductManager(path);
 
 router.get('/', async(req,res)=>{
@@ -21,8 +21,8 @@ router.get('/:pid',async(req,res)=>{
  
 router.post('/', async(req,res) =>{
     
-    const {title,description,price,thumbnail,code,stock}=req.body
-    const product={title,description,price,thumbnail,code,stock}
+    const {title,description,price,thumbnail,status,code,stock}=req.body
+    const product={title,description,price,thumbnail,status:true,code,stock}
     console.log('este esel que necesito',product)
     const result= await products.addProduct(product)
     res.send( result)
