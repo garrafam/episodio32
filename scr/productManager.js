@@ -48,7 +48,7 @@ export default class ProductManager{
             }else{
                 product.id= productsBd[productsBd.length-1].id+1
             }
-            console.log('hhh',product)
+            console.log('hhhhh',product)
             console.log('hhh',product.id)
             productsBd.push(product)
            // console.log ('los productos', product)
