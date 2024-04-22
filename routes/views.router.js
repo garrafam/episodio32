@@ -1,5 +1,6 @@
 import {Router} from 'express'
 import ProductManager from '../scr/productManager.js';
+//import obtenerProductosMiddleware from '../scr/utils.js';
 const router= Router()
 const path='./Product.json'
 const products= new ProductManager(path);
@@ -34,7 +35,7 @@ router.get('/realTimeProducts',async(req,res)=>{
         apellido: user.apellido,
         role: user.role==='admin',
         title:'Mercadito|| Lagran7',
-        products: await products.getProduct(),
+        products,
         styles:'styles.css'
     })
 

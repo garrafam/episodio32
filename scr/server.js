@@ -7,6 +7,8 @@ import { uploader } from './utils.js'
 import handlebars from 'express-handlebars'
 import viewsRouter from '../routes/views.router.js'
 import {Server} from 'socket.io'
+import { productSocket } from '../utils/productsSpcket.js'
+
 const path='./Product.json'
 const products= new ProductManager(path);
 
@@ -16,19 +18,18 @@ const httpServer=app.listen(8080,error=>{
     console.log('escuchando el puerto 8080')
     })
 
-const socketServer=new Server(httpServer)    
+const io=new Server(httpServer)    
 
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(__dirname+'/public'))
-//app.get ('/',(req,res)=>{
-//    res.status(200).send('<h1>hola soy marcos</h1>')
-//})
+
 app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname+'/views')
 app.set('view engine', 'handlebars')
-
+//middl
+app.use(productSocket(io))
 app.use('/',viewsRouter)
 app.use('/subir-archivo', uploader.single('myFile'), (req,res)=>{
     if (!req.file){
@@ -42,26 +43,19 @@ app.use((error,req,res,next)=>{
     console.log(error)
     res.status(500).send('Error 500 en el server')
 })
-
-socketServer.on('connection', socket=>{
+ let messages=[]
+ io.on('connection', socket=>{
     console.log('nuevo cliente conectado')
-    socket.on('message', data=>{
-        console.log(data)
-    })
-    socket.emit('socket_individual','este mensaje solo lo debe recibir este socket')
-    socket.broadcast.emit('para_todos_menos_el_actual','este mensaje lo veran todos los conectados menos este')
-    socketServer.emit('eventos para todos','este mje lo recibiran todos ')
-    socket.on('producto_actualizado',data=>{
-        console.log('otro cliente conectado')
-        console.log(data)
+    
+   
+    socket.on('getProducts',async () => {
+        const productos = await products.getProduct();
+        socket.emit('productListUpdate', productos);
         
+    });  
+    socket.on('message',data=>{
+        console.log('message data:' ,data)
+        messages.push(data)
+        io.emit('messageLogs', messages)
     })
-    socket.emit('getProducts',(producto)=>{
-        products.getProduct(producto)
-    })
-
-   // socket.on('addProduct', (producto) => {
-    //    products.addProduct(producto);
-   //     socket.emit('productListUpdated', products.getProduct());
-   // });
 })

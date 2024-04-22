@@ -34,7 +34,7 @@ router.put('/:pid', async(req,res) =>{
        const{title,description,price,thumbnail,code,stock}=req.body
     const update2={title,description,price,thumbnail,code,stock}    
     console.log('este es el que necesito',update2)
-       const result= await products.updateProduct(parseInt(pid),{update2})
+       const result= await products.updateProduct(parseInt(pid),update2)
        res.send( result)  
 })
 router.delete('/:pid', async(req,res) =>{

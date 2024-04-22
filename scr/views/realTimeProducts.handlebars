@@ -3,21 +3,65 @@
     <div>
         {{#if role}}
         <h2>si puede ver los productos</h2>
-        {{#each products}}
         <div>
-            <p>Id del producto {{this.id}}</p>
-            <p>Nombre del producto {{this.title}}</p>
-            <p>Precio del producto {{this.price}}</p>
-            <p>Descripcion del producto {{this.description}} </p>
-            <p>Codigo del producto {{this.code}}</p>
-            <p>Stock del producto {{this.stock}}</p>
-            <p>Status {{this.status}}</p>
-            <p>Thumbnail {{this.thumbnail}}</p>		
+            <ul id="lista-productos"></ul>
         </div>
-        {{/each}}
+    
         {{else}}
         <h2>Ud no puede ver los productos</h2>
         {{/if}}
+    </div>
+    <div>
+        <h2>Formulario para el ingreso de Productos nuevos</h2>
+        <form id="formulario-producto">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="precio">Precio:</label>
+        <input type="number" id="price" name="price" required><br>
+        <label for="nombre">Thumbnail:</label>
+        <input type="text" id="thumbnail" name="thumbnail" required><br>
+        <label for="description">Caracteristicas:</label>
+        <input type="text" id="description" name="description" required><br>
+        <label for="code">Codigo:</label>
+        <input type="number" id="code" name="code" required><br>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required><br>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br>
+
+
+        <button type="submit">Agregar Producto</button>
+    </form>
+    </div>
+    <div>
+        <h2>Formulario para modificar productos</h2>
+        <form id="formulario-actualizacion-producto">
+        <label for="id">Id del producto:</label>
+        <input type="number" id="pid" name="id" ><br>  
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="title_act" name="title" ><br> 
+         <label for="precio">Precio:</label>
+        <input type="number" id="price_act" name="price" ><br>
+        <label for="nombre">Thumbnail:</label>
+        <input type="text" id="thumbnail_act" name="thumbnail" ><br>
+        <label for="description">Caracteristicas:</label>
+        <input type="text" id="description_act" name="description" ><br>
+        <label for="code">Codigo:</label>
+        <input type="number" id="code_act" name="code" ><br>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock_act" name="stock" ><br>
+        <label for="status">Status:</label>
+        <input type="text" id="status_act" name="status" ><br>
+        <button type="submit">Modificar Producto</button>
+         </form>
+    </div>
+    <div> 
+        <h2>Formulario para borrar productos</h2>
+        <form id="formulario-eliminacion-producto">
+        <label for="pcid">Id del producto:</label>
+        <input type="number" id="pcid" name="pcid" ><br> 
+        <button type="submit">eliminar Producto</button>
+         </form>
     </div>
 </main>
 

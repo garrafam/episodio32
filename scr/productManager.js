@@ -79,25 +79,44 @@ export default class ProductManager{
         
     }
    
-    updateProduct= async (pid, update2)=> {
-        const productsBd= await this.readFile() 
-        // Buscar el índice del producto con el ID dado
-        const index =productsBd.findIndex(product => product.id ===parseInt(pid) )
-        const update1= {...update2 , id:(pid) }
-        if (index !== -1) {
-            // Si se encuentra el producto, actualizar sus propiedades con los nuevos datos
-           const actualiza=productsBd.splice(index,1,update1)
-            console.log('hola el1',actualiza)
-            fs.writeFileSync(this.path, JSON.stringify(productsBd,'\t'),'utf-8');
-            
-            console.log(index,productsBd[index])
-
-            return true; 
-             // Devolver true para indicar que la actualización fue exitosa
+    updateProduct = async (pid, update2) => {
+        try {
+            const productsBd = await this.readFile();
+            const index = productsBd.findIndex(product => product.id === parseInt(pid));
+        
+            if (index !== -1) {
+                // Crear un objeto para contener las actualizaciones
+                const updates = {};
+        
+                // Iterar sobre las claves de update2 y agregar las no vacías al objeto de actualizaciones
+                for (const key in update2) {
+                    if (update2[key] !== '' && update2[key] !== undefined) {
+                        updates[key] = update2[key];
+                    }
+                }
+        
+                // Aplicar las actualizaciones al producto
+                productsBd[index] = { ...productsBd[index], ...updates };
+        
+                try {
+                    // Escribir la lista de productos actualizada en el archivo JSON
+                    fs.writeFileSync(this.path, JSON.stringify(productsBd, null, '\t'), 'utf-8');
+                    console.log('Producto actualizado:', productsBd[index]);
+                    return true; // Indicar que la actualización fue exitosa
+                } catch (error) {
+                    console.error('Error al escribir en el archivo:', error);
+                    return false; // Indicar que la actualización falló debido a un error de escritura
+                }
+            } else {
+                console.log('Producto no encontrado');
+                return false; // Indicar que la actualización falló porque no se encontró el producto
+            }
+        } catch (error) {
+            console.error('Error al actualizar el producto:', error);
+            return false; // Indicar que la actualización falló debido a un error
         }
-        return false; // Devolver false si no se encuentra ningún producto con el ID dado
     }
-
+    
     deleteProduct=async(pid)=>{
         try{const productsBd= await this.readFile()
             const product=productsBd.findIndex(prod=>prod.id===pid)
@@ -116,8 +135,8 @@ export default class ProductManager{
 
         }
     }
-
 }
+
 //module.exports={
     ProductManager
 //}

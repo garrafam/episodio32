@@ -1,5 +1,52 @@
+<main>
 <div>
-    Chat 
+    <h1>Bienvenidos al chat</h1> 
+    <input type="text" name="chatBox" id="chatBox">
+    
 </div>
+<div >
+    <ul id="messageLog"></ul>
+
+ </div>
+ </main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/chat.js"></script>
+
+<script>
+const socket=io()
+    
+Swal.fire ({
+   title:'Identifícate',
+   input: 'text',
+   text:'Ingresa el usuario para identificarte en el chat',
+  inputValideitor:value =>{
+      return !value && 'Necesitas escribir tu nombre para chatear'
+   },
+   allowOutsideClick: false
+   
+})
+
+.then (result=>{
+   user=result.value
+   console.log('soy' ,user)
+})
+let chatBox=document.querySelector('#chatBox')
+chatBox.addEventListener('keyup', evt => {
+    if(evt.key==='Enter') {
+        if(chatBox.value.trim().length > 0){
+            socket.emit('message',{user,message:chatBox.value})
+            console.log({user,message:chatBox.value})
+            chatBox.value=''
+        }
+    }
+})
+socket.on('messageLogs', data=>{
+   let log=document.getElementById('messageLog')
+   let messages=''
+    data.forEach(message=>{
+        messages+= `<li>${message.user}- dice ${message.message}</li> <br>`
+    })
+    log.innerHTML= messages
+})  
+</script>
