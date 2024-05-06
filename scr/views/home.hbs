@@ -1,0 +1,30 @@
+<main>
+    <h1>hola mundo Bienvenido  {{nombre}}{{apellido}}</h1>
+    <div>
+        {{#if role}}
+        <h2>si puede ver los productos</h2>
+        {{#each products}}
+        <div>
+            <p>Id del producto {{this._id}}</p>
+            <p>Nombre del producto {{this.title}}</p>
+            <p>Precio del producto {{this.price}}</p>
+            <p>Descripcion del producto {{this.description}} </p>
+            <p>Codigo del producto {{this.code}}</p>
+            <p>Stock del producto {{this.stock}}</p>
+            <p>Status {{this.status}}</p>
+            <p>Thumbnail {{this.thumbnail}}</p>
+            
+		
+		
+		
+		
+		
+		
+        </div>
+        {{/each}}
+        {{else}}
+        <h2>Ud no puede ver los productos</h2>
+        {{/if}}
+    </div>
+</main>
+<script src="js/home.js"></script>

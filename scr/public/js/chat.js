@@ -1,40 +1,41 @@
+
 const socket=io()
-//<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-//Swal.fire ({
-//   title:'Identifícate',
-//   input: 'text',
-//   text:'Ingresa el usuario para identificarte en el chat',
-//   inputValideitor:value =>{
-//      return !value && 'Necesitas escribir tu nombre para chatear'
-//   },
-//   allowOutsideClick: false
-//})
-//.then (result=>{////
- //  user=result.value
- //  console.log(user)
-//})
+    
+Swal.fire ({
+   title:'Identifícate',
+   input: 'text',
+   text:'Ingresa el usuario para identificarte en el chat',
+  inputValideitor:value =>{
+      return !value && 'Necesitas escribir tu nombre para chatear'
+   },
+   allowOutsideClick: false
+   
+})
 
- const input = document.getElementById('chatBox')
- const messageList= document.getElementById('messageLog')
- input.addEventListener('keyup', evt=>{
-    if(evt.key==='Enter'){
-        socket.emit('mensaje_cliente', input.value)
-        input.value=''
-
+.then (result=>{
+   user=result.value
+   console.log('soy' ,user)
+})
+let chatBox=document.querySelector('#chatBox')
+chatBox.addEventListener('keyup', evt => {
+    if(evt.key==='Enter') {
+        if(chatBox.value.trim().length > 0){
+            socket.emit('message',{user,message:chatBox.value})
+            console.log({user,message:chatBox.value})
+            chatBox.value=''
+        }
     }
- })
- socket.on('messages_server',data=>{
-    console.log('esto es el cliente',data)
- })
-
-
-//socket.emit('message','esto data en forma de string')
-//socket.on('socket_individual',data=>{
-//    console.log(data) 
- //})
-//socket.on('para_todos_menos_el_actual',data=>{
-    //console.log(data) 
- //})
- //socket.on('eventos para todos',data=>{
-    //console.log(data) 
- //})
+})
+socket.on('messageLogs', data=>{    
+    console.log('esto es data',data)
+   let log=document.getElementById('messageLog')
+   let html=''   
+   //Object.values(data).forEach(message=>{
+    data.forEach(message=>{
+   
+        html+= `<li>${message.user}- dice ${message.message}</li> <br>`
+        
+    })
+    
+   log.innerHTML= html
+})  
