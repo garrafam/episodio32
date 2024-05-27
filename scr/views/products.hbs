@@ -1,0 +1,23 @@
+<main>
+   <h1>Bienvenido Sr: {{userCookie.first_name}}   {{userCookie.last_name}} uds es {{userName}}</h1>
+<div>
+   <h2>Productos</h2>
+   {{#each productos}}
+   <p>Producto :{{this.title}}</p>
+   <p>Caracteristica :{{this.description}}</p>
+   <p>Precio :{{this.price}}</p>
+   <p>stock :{{this.stock}}</p>
+   
+   <button id="ingresoacarrito"; name="ingresoacarrito"   >ingresar a carrito</button>
+   <hr>
+   {{/each }}
+   {{#if hasPrevPage}}
+   <a href="/products?numPage={{prevPage}}">Anterior</a>
+   {{/if}}
+   <label >{{page}}</label>
+   {{#if hasNextPage}}
+   <a href="/products?numPage={{nextPage}}">Siguiente</a>
+   {{/if}}
+</div>
+<a href="/api/session/logout" class="btn btn-outline-danger w-25">logout</a>
+</main>

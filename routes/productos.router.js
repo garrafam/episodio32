@@ -8,7 +8,8 @@ const router=Router()
 const products= new ProductManagerMongo();
 
 router.get('/', async(req,res)=>{
-    const result=await products.getProduct()      
+    const{limit,numPage}=req.body
+    const result=await products.getProduct({limit,numPage})      
  res.send(result)
 })
 router.get('/:pid',async(req,res)=>{
