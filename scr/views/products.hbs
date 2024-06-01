@@ -1,23 +1,28 @@
 <main>
-   <h1>Bienvenido Sr: {{userCookie.first_name}}   {{userCookie.last_name}} uds es {{userName}}</h1>
-<div>
-   <h2>Productos</h2>
-   {{#each productos}}
-   <p>Producto :{{this.title}}</p>
-   <p>Caracteristica :{{this.description}}</p>
-   <p>Precio :{{this.price}}</p>
-   <p>stock :{{this.stock}}</p>
-   
-   <button id="ingresoacarrito"; name="ingresoacarrito"   >ingresar a carrito</button>
-   <hr>
-   {{/each }}
-   {{#if hasPrevPage}}
-   <a href="/products?numPage={{prevPage}}">Anterior</a>
-   {{/if}}
-   <label >{{page}}</label>
-   {{#if hasNextPage}}
-   <a href="/products?numPage={{nextPage}}">Siguiente</a>
-   {{/if}}
-</div>
-<a href="/api/session/logout" class="btn btn-outline-danger w-25">logout</a>
+    <h1>Bienvenido Sr: {{userCookie.first_name}} {{userCookie.last_name}} uds es {{userName}}</h1>
+    <div>
+        <h2>Productos</h2>
+        {{#each productos}}
+        <div>
+            <p>Id del producto:{{this._id}}</p>
+            <p>Producto: {{this.title}}</p>
+            <p>Característica: {{this.description}}</p>
+            <p>Precio: {{this.price}}</p>
+            <p>Stock: {{this.stock}}</p>
+            <p>Codigo: {{this.code}}</p>
+            <button class="ingresoacarrito" data-id="{{this._id}}">Ingresar a carrito</button>
+            <hr>
+        </div>
+        {{/each}}
+        {{#if hasPrevPage}}
+        <a href="/products?numPage={{prevPage}}&cid={{cid}}">Anterior</a>
+        {{/if}}
+        <label>{{page}}</label>
+        {{#if hasNextPage}}
+        <a href="/products?numPage={{nextPage}}&cid={{cid}}">Siguiente</a>
+        {{/if}}
+        <a href="/cart/{{ cid}}" class="btn btn-primary">Ver Carrito</a> <!-- Enlace para ver el carrito -->
+    </div>
+    <a href="/api/session/logout" class="btn btn-outline-danger w-25">logout</a>
 </main>
+<script src="/js/products.js"></script>

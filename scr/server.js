@@ -68,8 +68,13 @@ app.use (session({
 connectDb()
 
 app.engine('hbs', handlebars.engine({
-    extname:'.hbs'
-}))
+    extname:'.hbs',
+    defaultLayout: 'main',
+   
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+}}))
 app.set('views', __dirname+'/views')
 app.set('view engine', 'hbs')
 //middl

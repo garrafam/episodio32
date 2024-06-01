@@ -12,7 +12,7 @@ const cartSchema=new Schema({
     quantity: Number ,   // Cantidad 
 
 }]})
-cartSchema.pre('find', function(){
+cartSchema.pre(['find','findOne'], function(){
   this.populate('products.product')
 });
 

@@ -23,9 +23,9 @@ export default class ProductManagerMongo{
             console.log(error)
         }
     }
-    getProduct=async({limit=10, numPage=1})=>{
+    getProduct=async({limit=10, numPage=1} )=>{
   
-        const products= await this.productModel.paginate({},{limit ,page:numPage,sort:{price:-1}, lean:true})
+        const products= await this.productModel.paginate({},{limit ,page:numPage,sort:{price:1}, lean:true})
         return products
     }    
     getProductById= async(pid)=>{        

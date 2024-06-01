@@ -1,0 +1,22 @@
+<main>
+    <h1>Carrito de {{userCookie.first_name}} {{userCookie.last_name}}</h1>
+    {{#if cartProducts.length}}
+    <div>
+        <h2>Productos en tu carrito</h2>
+        {{#each cartProducts}}
+        <div>
+            <p>Producto: {{this.product.title}}</p> <!-- Asume que 'product' es el campo referenciado -->
+            <p>Característica: {{this.product.description}}</p>
+            <p>Precio: {{this.product.price}}</p>
+            <p>Codigo: {{this.product.code}}</p>
+            <p>Cantidad: {{this.quantity}}</p>
+            <hr>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <p>No hay productos en tu carrito.</p>
+    {{/if}}
+    <a href="/products?cid={{cartId}}" class="btn btn-primary">Volver a Productos</a>
+    <a href="/api/session/logout" class="btn btn-outline-danger">Logout</a>
+</main>
