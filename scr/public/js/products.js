@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Obtén el parámetro 'cid' de la URL
     const urlParams = new URLSearchParams(window.location.search);
+ 
     const carritoId = urlParams.get('cid');
     console.log('URLSearchParams:', window.location.search); // Verificar los parámetros de la URL
             console.log('CID:', carritoId); // Mostrar el valor de '

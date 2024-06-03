@@ -1,15 +1,20 @@
 import {Router} from 'express'
 import { UserManagerMongo } from '../scr/dao/userManagerMongo.js'
 import{auth} from '../scr/middlewares/auth.middleware.js'
+import { createHash, isValidPassword } from '../utils/bcrypt.js'
+import passport from 'passport'
 //import cookieRouter from '../routes/pruebas.router.js'
 export const sessionRouter=Router()
 const userServ= new UserManagerMongo
 
-//router.get ('/setCookie', (req,res)=>{
-//    res.cookie('codercookie','Esta es una coookie muy poderosa', {maxAge: 1000000}).send('cookie')
-//})
+sessionRouter.get('/github', passport.authenticate('github',{scope:['user.email']}, async(req,res)=>{})),
 
-sessionRouter.post('/register',async(req,res)=>{
+sessionRouter.get('/githubcallback', passport.authenticate('github',{failureRedirect:'/login'}),(req,res)=>{
+    req.session.user=req.user
+    res.redirect('/products')
+})
+
+/*sessionRouter.post('/register',async(req,res)=>{
     try{
     const {first_name, last_name, email, password}=req.body
     if( !email || !password) return res.status(401).send({status:'error',error:'hay que completar todos los datos '})
@@ -19,7 +24,7 @@ sessionRouter.post('/register',async(req,res)=>{
     first_name,
     last_name,
     email,
-    password
+    password: createHash(password)
     }
     const result= await userServ.createUser(newUsuario)
     res.cookie('codercookie',{first_name,last_name}, {maxAge: 1000000})
@@ -48,8 +53,13 @@ sessionRouter.post ('/login',async(req,res)=>{
         console.log(req.session.user)
         return res.redirect('/products')
     }
-        const userFound= await userServ.getUserBy({email,password})
+        const userFound= await userServ.getUserBy({email})
     if (!userFound) return  res.status(401).send({status:'error',error:'el usuario no existe '})
+    
+       // const isValid= isValidPassword(password, {password: userFound.password})//retorna true o false
+    
+       if (!isValidPassword(password, {password: userFound.password}))return res.status(401).send({status:'error', error:'password incorrecto'})
+    
     
         req.session.user={
         email,
@@ -60,7 +70,40 @@ sessionRouter.post ('/login',async(req,res)=>{
         console.log(req.session.user)
         res.redirect('/products' )
       
+});*/
+
+sessionRouter.post('/register', passport.authenticate('register',{failureRedirect:'/failregister'}), async (req , res) =>{
+    res.redirect('/login')//.send({status:'success', message:'usuario registrado'})
 })
+
+
+sessionRouter.post('/failregister',(req,res)=>{
+    console.log('fallo el registro')
+    res.send({error:'fallo el registro '})
+})
+
+
+sessionRouter.post('/login', passport.authenticate('/login',{failureRedirect:'/faillogin'}),async(req,res)=>{
+ if(!req.user) return res.status(400).send({status:'error', error:'credenciales invalidas'})
+req.session.user={
+    first_name:req.user.first_name,
+    last_name:req.user.last_name,
+    email:req.user.email
+}
+return res.redirect('/products');
+
+
+
+
+})
+
+
+sessionRouter.post('/faillogin',(req,res)=>{
+    console.log('fallo el login')
+    res.send({error:'fallo el login'})
+})
+
+
 sessionRouter.get('/current',auth, (req,res)=>{
     res.send('datos sensibles')
 })

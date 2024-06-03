@@ -20,6 +20,9 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import FileStore from 'session-file-store'
 import MongoStore from 'connect-mongo'
+import  {initializePassport } from './config/passport.config.js'
+import passport from 'passport'
+
 //const path='./Product.json'
 //const products= new ProductManager(path);
 const products= new ProductManagerMongo();
@@ -66,6 +69,9 @@ app.use (session({
     }))
 //mongoose.connect
 connectDb()
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.engine('hbs', handlebars.engine({
     extname:'.hbs',
@@ -87,7 +93,7 @@ app.use('/subir-archivo', uploader.single('myFile'), (req,res)=>{
     res.send('archivo subido')
 
 })
-app.use('/api/session',sessionRouter )
+app.use('/api/session', sessionRouter )
 app.use('/',pruebasRouter)
 app.use('/api/carts',cartsRouter)
 app.use('/api/products',productsRouter)

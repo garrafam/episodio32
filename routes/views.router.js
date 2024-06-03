@@ -27,17 +27,19 @@ router.get('/', (req, res) => {
     res.redirect('/login');
   });
 router.get('/home',async(req,res)=>{
+    const { limit, numPage } = req.query;
     res.render('home',{
+        
         username: user.username,
         nombre: user.nombre,
         apellido: user.apellido,
         role: user.role==='admin',
         title:'Mercadito|| Lagran7',
-        products: await productsServ.getProduct(),
-        styles:'styles.css'
-       
+        products: await productsServ.getProduct({limit,numPage}),
+        styles:'styles.css',
+        
     })
-    //console.log(products.getProduct())
+  
 })
 //auth,
 router.get('/products', async  (req,res)=>{
@@ -111,7 +113,7 @@ router.get('/realTimeProducts',async(req,res)=>{
         apellido: user.apellido,
         role: user.role==='admin',
         title:'Mercadito|| Lagran7',
-        products:await productsServ.getProduct(),
+        products:await productsServ.getProduct(limit=3,numPage),
         styles:'styles.css'
     })
 

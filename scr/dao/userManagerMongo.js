@@ -11,8 +11,8 @@ export class UserManagerMongo{
         })
         return user
     }
-    async createUser(user){
-        return await this.userModel.create(user)
+    async createUser(newUser){
+        return await this.userModel.create(newUser)
     }
     async getUserBy(filter){
         return this.userModel.findOne(filter)
