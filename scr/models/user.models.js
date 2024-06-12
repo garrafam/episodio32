@@ -13,7 +13,12 @@ const userSchema=new Schema({
     password: String,
     role:{
         type: String,
+        enum: ['user','user_premiun', 'admin'],
         default: 'user'
+    },
+    cartId:{
+        type:Schema.ObjectId,
+        ref: 'carts'
     }
 
 })

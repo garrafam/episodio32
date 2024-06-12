@@ -113,7 +113,7 @@ router.get('/realTimeProducts',async(req,res)=>{
         apellido: user.apellido,
         role: user.role==='admin',
         title:'Mercadito|| Lagran7',
-        products:await productsServ.getProduct(limit=3,numPage),
+        products:await productsServ.getProduct(),
         styles:'styles.css'
     })
 

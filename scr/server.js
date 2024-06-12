@@ -37,22 +37,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(__dirname+'/public'))
 app.use(cookieParser('s3cr3t@Firma'))
-//app.use(session({
-//    secret:'s3cr3tC@der',
-//    resave:true,
-//    saveUninitialized:true
-//}))
-//const fileStorage=FileStore(session)
-//app.use (session({
-//    store:new fileStorage({
-//        path: './sessions',
-//        ttl : 100,
-//        retries:0
-//    }),
-//    secret:'s3cr3tC@der',
-//    resave:true,
-//    saveUninitialized:true
-//}))
+initializePassport()
+app.use(passport.initialize())
 app.use (session({
         store:MongoStore.create({
            mongoUrl: 'mongodb+srv://garrafa2006:zML4OgtalsVuQJtL@cluster0.foflomd.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0',

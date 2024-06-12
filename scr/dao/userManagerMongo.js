@@ -5,12 +5,10 @@ export class UserManagerMongo{
     constructor( ){
         this.userModel=userModel;
     }
-    async getUser({limit=10 , numpage=1}){
-        const user= await this.userModel.paginate({},{limit,page:numpage,sort,lean:true 
-            
-        })
-        return user
-    }
+    getUser=async filter =>await this.userModel.findOne(filter)
+       
+        
+  
     async createUser(newUser){
         return await this.userModel.create(newUser)
     }
