@@ -1,18 +1,20 @@
 import { userModel } from "../models/user.models.js";
 
 
-export class UserManagerMongo{
+ class UserManagerMongo{
     constructor( ){
         this.userModel=userModel;
     }
-    getUser=async filter =>await this.userModel.findOne(filter)
-       
-        
+    getUsers=async ( )=> await this.userModel.find()
+    getUser=async (filter )=> await this.userModel.findOne(filter)       
   
-    async createUser(newUser){
+    createUser=async (newUser)=>{
         return await this.userModel.create(newUser)
     }
-    async getUserBy(filter){
-        return this.userModel.findOne(filter)
+     getUserBy=async(filter)=>{
+        return await this.userModel.findOne(filter)
     }
+     deleteUser=async(filter)=> {await this.userModel.deleteOne(filter )
+     }
 }
+export default UserManagerMongo

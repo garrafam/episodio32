@@ -1,6 +1,6 @@
 import passport from 'passport'
 import {Strategy, ExtractJwt} from 'passport-jwt'
-import { PRIVATE_KEY } from '../../utils/jwt.js'
+import { PRIVATE_KEY } from '../utils/jwt.js'
 
 
 const JWTStrategy = Strategy

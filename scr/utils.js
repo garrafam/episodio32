@@ -1,8 +1,7 @@
 import {fileURLToPath  }from 'url'
 import {dirname} from 'path'
 import multer from 'multer'
-//import ProductManager from '../scr/dao/productManager.js'
-import ProductManagerMongo from './dao/productsManagerMongo.js'
+import ProductManagerMongo from './dao/productsDaoMongo.js'
 const products=new ProductManagerMongo()
 const __filename= fileURLToPath(import.meta.url)
 export const __dirname= dirname(__filename)

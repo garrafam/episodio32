@@ -1,7 +1,23 @@
 import { connect } from "mongoose";
-export const connectDb =() => {
+import dotenv from 'dotenv'
+import { program } from "../utils/commander.js";
+
+const {mode }= program.opts()
+dotenv.config({
+ path :mode==='production' ? './.env.production' : './.env.development'
+
+})
+
+export const objectConfig ={
+  port:            process.env.PORT || 8080,
+  mongo_url:       process.env.MONGO_URL,
+  jwt_private_key: process.env.PRIVATE_KEY 
+
+}
+
+export const connectDb =async() => {
  //connect('mongodb://127.0.0.1:27017/ecommerce')  
-  connect('mongodb+srv://garrafa2006:zML4OgtalsVuQJtL@cluster0.foflomd.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0')
+  connect(process.env.MONGO_URL)
   console.log('base de datos conectada')
 
 }
