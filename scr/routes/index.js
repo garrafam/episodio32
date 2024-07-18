@@ -4,6 +4,7 @@ import cartsRouter from './api/carrito.router.js'
 import usersRouter from './api/user.router.js'
 import pruebasRouter from './api/pruebas.router.js'
 import productsRouter from './api/products.router.js'
+import ticketRouter from './api/ticket.router.js'
 import {sessionRouter} from './api/session.router.js'
 import { uploader } from '../utils.js'
 const router= Router()
@@ -21,6 +22,7 @@ router.use('/api/session', sessionRouter )
 router.use('/',pruebasRouter)
 router.use('/api/carts',cartsRouter)
 router.use('/api/products',productsRouter)
+router.use('/api/ticket', ticketRouter)
 router.use('/api/user',usersRouter)
 router.use((error,req,res,next)=>{
     console.log(error)

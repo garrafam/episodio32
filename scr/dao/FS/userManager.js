@@ -3,7 +3,7 @@ import fs from 'fs'
 
 const path = './file/Usuarios.json'
 
-class UserManager {    
+export default class UserManager {    
     constructor(path){
         this.path = path
     }

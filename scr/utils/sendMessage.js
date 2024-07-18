@@ -1,12 +1,14 @@
-import { chatsModel } from '../models/chats.models.js'
+import { chatsModel } from '../dao/MONGO/models/chats.models.js'
+import { productService } from '../service/index.js'
 export const sendMessage=(io)=>{
 io.on('connection', socket=>{
     console.log('nuevo cliente conectado')
     
    
     socket.on('getProducts',async () => {
-        const productos = await products.getProduct();
+        const {docs} = await productService.getProducts();
         //console.log('esto es productos',productos)
+       const productos=docs
         socket.emit('productListUpdate', (productos));
         
     });  

@@ -1,20 +1,20 @@
 import { Router } from 'express'
 import ProductsController from '../../controllers/products.controller.js'
-
-
+import { passportCall } from '../../middlewares/passportCall.middleware.js';
+import { authorization } from '../../middlewares/authorization.middleware.js';
 const router=Router()
 
-const {getProducts,getProductById,addProduct,updateProducts,deleteProducts}= new ProductsController();
+const {getProducts,getProductBy,addProduct,updateProduct,deleteProduct}= new ProductsController();
 
 router.get('/', getProducts)
 
-router.get('/:pid',getProductById )
+router.get('/:pid',getProductBy )
 
-router.post('/', addProduct )
+router.post('/',passportCall('jwt'),authorization('user'), addProduct )
 
-router.put('/:pid',updateProducts )
+router.put('/:pid',passportCall('jwt'),authorization('user'),updateProduct )
 
-router.delete('/:pid',deleteProducts)
+router.delete('/:pid',passportCall('jwt'),authorization('user'),deleteProduct)
 
 
 export default router

@@ -1,8 +1,12 @@
-import UserManagerMongo from "../dao/userManagerMongo.js";
-import ProductsDaosMongo from "../dao/productsDaoMongo.js";
-import CartDaoMongo from "../dao/cartDaoMongo.js";
 
-export const userService   = new UserManagerMongo()
-export const productService= new ProductsDaosMongo()
-export const cartService= new CartDaoMongo()
 
+import UserRepository from "../repositories/user.repository.js";
+import { CartsDao, ProductsDao, TicketsDao, UsersDao } from "../dao/factory.js";
+import ProductRepository from "../repositories/product.repository.js";
+import CartRepository from "../repositories/cartRepository.js";
+import TicketRepository from "../repositories/ticket.repository.js";
+
+export const userService   = new UserRepository(new UsersDao())
+export const productService= new ProductRepository(new ProductsDao())
+export const cartService= new CartRepository(new CartsDao())
+export const ticketService= new TicketRepository(new TicketsDao)

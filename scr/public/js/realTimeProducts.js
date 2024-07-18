@@ -6,7 +6,7 @@ socket.on('connect', () => {
 // Manejar evento productListUpdate
 socket.on('productListUpdate', (productos) => {
     actualizarListaProductos(productos);
-    console.log(productos)
+    console.log('hola son',productos)
     
 });
 function actualizarListaProductos(productos) {

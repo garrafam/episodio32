@@ -1,5 +1,6 @@
+
 import  {userService } from "../service/index.js"
-//const userServ= new UserManagerMongo()
+
 class UserController{
     constructor(){
        this.userService=  userService
@@ -7,7 +8,7 @@ class UserController{
     }
 getUsers   =async (req, res) => {
     try{
-    const users = await this.userServ.getUsers()
+    const users = await this.userService.getUsers()
     res.send(users)
     } catch(error){
         console.log ('error')
@@ -15,7 +16,7 @@ getUsers   =async (req, res) => {
 }
 getUser    =async (req, res) => {
     try{
-    const user = await this.userServ.getUser(filter)
+    const user = await this.userService.get(filter)
     res.send(user)
     }catch(error){
         console.log('error')
@@ -28,13 +29,15 @@ getUser    =async (req, res) => {
     if(!email) return res.send({status: 'error', error: 'faltan campos'})
    
     // persistencia en mongo -> atlas
-    const newUser = {
+    const newUser ={
         first_name,
         last_name,
-        email
+        email,
+        password
+        
     }
-
-    const result = await this.userServ.createUser(newUser)
+  
+    const result = await this.userService.create(newUser)
     // validar el result
     res.status(200).send({ status: 'success', payload: result })
 }catch(error){
@@ -47,7 +50,7 @@ updateUser = async (req, res) => {
     const { first_name, last_name, email} = req.body    
     if(!first_name,!last_name, !email) return res.send({status: 'error', error: 'faltan campos'})   
   
-    const result = await this.userServ.getUserBy({_id: uid}, {first_name, last_name, email})    
+    const result = await this.userService.update( uid, req.body)    
 
     res.send({status: 'success', payload: result})
 }catch(error){console.log('error')}
@@ -56,7 +59,7 @@ updateUser = async (req, res) => {
 deleteUser =async (req, res) => {
     try{
     const { uid } = req.params    
-    const result = await this.userServ.deleteUser({_id: uid})
+    const result = await this.userService.delete({_id: uid})
     res.send({status: 'success', payload: result})
     }catch(error){
         console.log('error')

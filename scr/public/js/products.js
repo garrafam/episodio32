@@ -1,16 +1,36 @@
 
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtén el parámetro 'cid' de la URL
-    const urlParams = new URLSearchParams(window.location.search);
- 
-    const carritoId = urlParams.get('cid');
-    console.log('URLSearchParams:', window.location.search); // Verificar los parámetros de la URL
-            console.log('CID:', carritoId); // Mostrar el valor de '
+    // Obtener el `carritoId` de una variable global inyectada por el servidor
+    const carritoId = window.cid;
+
+    console.log('Carrito ID:', carritoId); // Muestra el valor de 'carritoId'
+
     if (!carritoId) {
-        alert('No se encontró el ID del carrito en la URL.');
+        alert('No se encontró el ID del carrito.');
         return;
     }
+
+    try {
+
+        // Usa carritoId para obtener la información del carrito
+        fetch(`/api/cart/${carritoId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Maneja la respuesta del servidor
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching cart:', error);
+            });
+    } catch (error) {
+        console.error('Error decoding token:', error);
+        alert('Token inválido.');
+    }
     
+    // Usa carritoId para obtener la información del carrito
+
+
     document.querySelectorAll('.ingresoacarrito').forEach(button => {
         button.addEventListener('click', function() {
             const productId = this.getAttribute('data-id');

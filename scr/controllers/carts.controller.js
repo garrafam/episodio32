@@ -1,3 +1,4 @@
+import { userModel } from "../dao/MONGO/models/user.models.js"
 import { cartService } from "../service/index.js"
 
 class CartController{
@@ -16,14 +17,13 @@ class CartController{
     getCartBy=async(req,res)=>{
         try{
         const {cid}=req.params
-        const result= await this.cartService.getCartBy({_id:cid})
-        console.log(cid)
+        const result= await this.cartService.getCartBy(cid)      
         res.send(result)
         }catch(error){
             console.log('error')
         }
     }
-    createCart=async(req,res) =>{ 
+    createCart=async(req,res) =>{                
         try{           
         const result=  await this.cartService.createCart()
         res.send(result)
@@ -41,10 +41,10 @@ class CartController{
         }
         
     }
-    deleteProduct=async (req, res) => { 
+    deleteProductCart=async (req, res) => { 
         try{   
         const { cid,pid } = req.params   
-        const result = await this.cartService.deleteProduct(cid, pid)
+        const result = await this.cartService.deleteProductCartBy(cid, pid)
         res.send({status: 'success', payload: result})
         }catch(error){
             console.log('error')
@@ -53,7 +53,7 @@ class CartController{
     deletCart=async (req, res) => {
         try{    
         const { cid } = req.params   
-        const result = await this.cartService.deletCart(cid,)
+        const result = await this.cartService.deleteCart(cid,)
         res.send({status: 'success', payload: result})
         }catch(error){
             console.log('error')
