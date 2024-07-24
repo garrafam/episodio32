@@ -1,5 +1,8 @@
 
+import { CustomError } from "../service/errors/customError.js"
+import { generateUserError } from "../service/errors/info.js"
 import  {userService } from "../service/index.js"
+import { EError } from "../service/errors/enums.js"
 
 class UserController{
     constructor(){
@@ -22,12 +25,22 @@ getUser    =async (req, res) => {
         console.log('error')
     }
 }
-    createUser =async (req, res) => {    
+    createUser =async (req, res, next) => {    
     try{
     const { first_name, last_name, email} = req.body
     // console.log(first_name, last_name, email, password)
-    if(!email) return res.send({status: 'error', error: 'faltan campos'})
-   
+   // if(!email) return res.send({status: 'error', error: 'faltan campos'})
+      if(!first_name||!last_name||!email){
+        CustomError.createError({
+            name:'Error al crear un usuario',
+            cause: generateUserError({first_name, last_name, email}),
+            message:'Error al crear un usuario',
+            code:EError.INVALID_TYPES_ERROR
+
+     
+
+        })
+      }
     // persistencia en mongo -> atlas
     const newUser ={
         first_name,
@@ -42,6 +55,7 @@ getUser    =async (req, res) => {
     res.status(200).send({ status: 'success', payload: result })
 }catch(error){
     console.log('error')
+    next(error)
 }
 }
 updateUser = async (req, res) => {

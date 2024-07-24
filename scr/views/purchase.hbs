@@ -1,14 +1,14 @@
 
 
-<div>
+<main>
     <h1>Ticket de Compra</h1>
-    <p>ID del Usuario: {{ticket.userId}}</p>
     <p>Fecha: {{ticket.date}}</p>
-    <h2>Productos</h2>
+    <p>Total: {{ticket.totalPrice}}</p>
+    <h2>Productos Comprados:</h2>
     <ul>
         {{#each ticket.products}}
-        <li>{{this.name}} - ${{this.price}}</li>
+        <li>{{this.product.title}} - Cantidad: {{this.quantity}}</li>
         {{/each}}
     </ul>
-    <h3>Total: ${{ticket.totalPrice}}</h3>
-</div>
+    <a href="/products" class="btn btn-primary">Volver a Productos</a>
+</main>

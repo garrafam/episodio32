@@ -19,6 +19,8 @@ import passport from 'passport'
 import dotenv from 'dotenv'
 import { sendMessage } from './utils/sendMessage.js'
 import cors from 'cors'
+import { handleErrors } from './middlewares/errors/index.js'
+
 
 const {port}=objectConfig
 //const path='./Product.json'
@@ -69,7 +71,7 @@ app.set('views', __dirname+'/views')
 app.set('view engine', 'hbs')
 //middl
 app.use(productSocket(io))
-
+app.use(handleErrors())
 
 httpServer.listen(port, error=> {
     if (error)console.log(error)

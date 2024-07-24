@@ -23,7 +23,7 @@ export default class TicketController{
     async createTicket(req, res) {
         try {
             //console.log ('car',req.user.cartId)
-            const  {cid}  = req.user.cartId
+            const  {cid}  = req.params.cid
           
             const cart = await cartService.getCartBy(cid);
     

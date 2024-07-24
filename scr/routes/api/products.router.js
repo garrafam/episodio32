@@ -10,7 +10,7 @@ router.get('/', getProducts)
 
 router.get('/:pid',getProductBy )
 
-router.post('/',passportCall('jwt'),authorization('user'), addProduct )
+router.post('/',addProduct )
 
 router.put('/:pid',passportCall('jwt'),authorization('user'),updateProduct )
 

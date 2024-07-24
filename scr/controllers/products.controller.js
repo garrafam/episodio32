@@ -1,3 +1,6 @@
+import { CustomError } from "../service/errors/customError.js";
+import { EError } from "../service/errors/enums.js";
+import { generateProductsError } from "../service/errors/info.js";
 import { productService } from "../service/index.js"
 
 
@@ -29,12 +32,19 @@ getProductBy=async(req,res)=>{
      res.send( result)   
  
  }
-addProduct=async (req, res) => {
-    
-    const {  title, description, price, thumbnail, status,code,stock} = req.body
-     console.log(title, description, price, thumbnail, status,code,stock)
-    if(!title ||!description||!price||!status|| !code||!stock) return res.send({status: 'error', error: 'faltan campos'})
-   
+addProduct=async (req, res, next) => {
+    try{
+        const {  title, description, price, thumbnail, status,code,stock} = req.body
+    // console.log(title, description, price, thumbnail, status,code,stock)
+   // if(!title ||!description||!price||!status|| !code||!stock) return res.send({status: 'error', error: 'faltan campos'})
+   if(!title ||!description||!price|| !code||!stock){
+    CustomError.createError({
+        name:'Error al crear un producto',
+        cause: generateProductsError({title, description, price, code, stock}),
+        message:'Error al crear un producto',
+        code:EError.INVALID_TYPES_ERROR
+        })
+  }
     // persistencia en mongo -> atlas
     const newProducts = {
         title ,
@@ -50,6 +60,11 @@ addProduct=async (req, res) => {
     const result = await this.productService.createProduct(newProducts)
     
     res.status(200).send({ status: 'success', payload: result })
+}catch(error){
+    console.log('error')
+    next(error)
+}
+    
 }
 updateProduct=async (req, res) => {
     try{
