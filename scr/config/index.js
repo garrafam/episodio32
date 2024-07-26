@@ -14,8 +14,7 @@ export const objectConfig ={
   mongo_url:       process.env.MONGO_URL,
   jwt_private_key: process.env.PRIVATE_KEY, 
   persistence:     process.env.PERSISTENCE,
-  gmail_user:      process.env.GMAIL_USER,
-  gmail_pass:      process.env.GMAIL_PASS,
+
   
 
 }
